@@ -98,10 +98,6 @@ df[0:1]
 
 df[df["Title"].str.contains("The Godfather")]
 
-"""indices1 = pd.Series(df.index, index=df["title"])
-type(indices1)
-del indices1"""
-
 
 def similarity_p_prep(dataframe, lang=None, variable=None):
     tfID = TfidfVectorizer(stop_words=lang)
@@ -114,32 +110,6 @@ def similarity_p_prep(dataframe, lang=None, variable=None):
 def cos_sim():
     cosine_sim = cosine_similarity(tfID_matrix, tfID_matrix)
     return cosine_sim
-
-
-"""# stop_words egnlish ingilizce yaygın kullanılan anlam ifade etmeyen kelimeleri almaz
-#   and in on gibi, çok fazla boş gözlem değeri gelmesin
-
-tfID = TfidfVectorizer(stop_words="english")
-
-df["overview"].isnull().sum()
-
-# overview NaN olan değerleri sil veya boşluk ile değiştir
-df["overview"] = df["overview"].fillna("")
-
-tfID_matrix = tfID.fit_transform(df["overview"])
-
-tfID_matrix.shape
-
-tfID.get_feature_names()
-
-tfID_matrix.toarray()
-
-########################################################################
-# Cosine Similarity
-
-cosine_sim = cosine_similarity(tfID_matrix, tfID_matrix)
-# 1 index teki filmin bütün diğer filmler ile benzerlik skoru var
-cosine_sim[1]"""
 
 
 tfID_matrix = similarity_p_prep(df, "english", "Description")
